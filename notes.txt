@@ -15,7 +15,7 @@ Stuff to Work On:
 - Questions propagate automatically on submit
 - Button reset after each Question
 - Remove form and use buttons
-- 
+- Issue with high-score vs current score
 
 // Styling
 - outline for buttons
