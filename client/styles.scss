@@ -44,7 +44,7 @@ h1 {
 
 .card {
   display: flex;
-  border: 0.5rem solid $secondary-color;
+  border: 0.4rem solid $secondary-color;
   border-radius: $radius;
   padding: 2rem;
 }
@@ -125,7 +125,6 @@ a:hover {
 
 .questionSubmitBtn {
   background-color: rgb(0, 160, 0);
-  // background: linear-gradient(rgb(0, 160, 0), rgb(0, 120, 0));
   border: 0;
   color: #fff;
   padding: 0.5rem;
@@ -138,7 +137,6 @@ a:hover {
 .questionSubmitBtn:hover {
   cursor: pointer;
   background-color: darken(rgb(0, 160, 0), 5%);
-  // background: linear-gradient(rgb(0, 200, 0), rgb(0, 160, 0));
 }
 
 .questionSubmitBtn:active {
