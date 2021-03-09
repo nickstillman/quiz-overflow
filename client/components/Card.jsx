@@ -1,5 +1,19 @@
 import React from 'react';
 
+/*
+
+currentScore={this.props.currentScore}
+newHighScore={this.props.newHighScore}
+highScore={this.props.highScore}
+updateHighScore={this.props.updateHighScore}
+correctAnswers={this.props.correctAnswers}
+correctChoice={this.props.correctChoice}
+cardsThisSession={this.props.cardsThisSession}
+card={this.props.card}
+/>
+
+*/
+
 const Card = (props) => (
 /*  Render a div with a ptag containing card.question 
         -- Render a labeltag and an inputtag  */
@@ -11,6 +25,7 @@ const Card = (props) => (
     //  console.log('if it is the correct answer', e.target[0].attributes.iscorrect.value)
     //  console.log('if 1st choice is checked', e.target[0].checked)
     //  console.log(e.target)
+    // CORE LOGIC OF APP
      for (let i = 0; i < 4; i++){
          if(e.target[i].checked){
            if(e.target[i].attributes.iscorrect.value === 'true') {
