@@ -1,7 +1,7 @@
 import * as types from '../actions/actionTypes';
 
 const initialState = {
-  loggedIn: true, // if cookie(SSID) exists then true, else false
+  loggedIn: false, // if cookie(SSID) exists then true, else false
   message: null,
   showSignup: false,
   loginFailure: false,
@@ -53,6 +53,7 @@ const authReducer = (state = initialState, action) => {
       };
     }
     case types.LOGIN_STATUS: {
+      console.log('login status fired', action.payload);
       return {
         ...state,
         loggedIn: action.payload,
