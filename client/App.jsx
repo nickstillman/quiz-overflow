@@ -22,21 +22,27 @@ class App extends React.Component {
   constructor(props) {
     super(props);
   }
-
+  
   componentDidMount() {
     console.log('component mounted!');
-    const SSID = Cookies.get('ssid');
-    const loginStatus = SSID ? true : false;
-
-    this.props.changeLoginStatus(loginStatus);
+    // const SSID = Cookies.get('ssid');
+    // const loginStatus = SSID ? true : false;
+    fetch('/check-session')
+    .then(res => res.json())
+    .then(res =>
+      console.log('delete me --> my value is:', res)
+      // res = true/false for is user logged in, do work here inside .then
+      )
+      .catch(e => console.log(e));
+      // this.props.changeLoginStatus(loginStatus);
+    }
+    
+    render() {
+      console.log('status', this.props.loggedIn);
+      const auth = this.props.loggedIn ? <CardContainer /> : <AuthContainer />;
+      
+      return <div className="mainContainer">{auth}</div>;
+    }
   }
-
-  render() {
-    console.log('status', this.props.loggedIn);
-    const auth = this.props.loggedIn ? <CardContainer /> : <AuthContainer />;
-
-    return <div className="mainContainer">{auth}</div>;
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+  
+  export default connect(mapStateToProps, mapDispatchToProps)(App);
