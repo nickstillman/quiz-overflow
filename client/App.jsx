@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Cookies from 'js-cookie';
 import AuthContainer from './containers/AuthContainer';
@@ -13,12 +13,10 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   changeLoginStatus: (bool) => dispatch(authActions.changeLoginStatus(bool)),
+  checkSession: () => dispatch(authActions.checkSession()),
 });
 
-// Current Goal: on component did mount, check cookies for ssID
-// check for a current action to fire to set loggedIn to true
-
-class App extends React.Component {
+class App extends Component {
   constructor(props) {
     super(props);
   }
@@ -29,6 +27,7 @@ class App extends React.Component {
     const loginStatus = SSID ? true : false;
 
     this.props.changeLoginStatus(loginStatus);
+    // this.props.checkSession();
   }
 
   render() {

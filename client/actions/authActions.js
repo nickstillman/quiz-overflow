@@ -15,6 +15,11 @@ export const changeLoginStatus = (bool) => ({
   payload: bool,
 });
 
+export const checkSession = () => (dispatch) => {
+  console.log('checkSession fired...');
+  fetch('/quiz-overflow');
+};
+
 export const postLogin = ({ username, password }) => (dispatch) => {
   fetch('/login', {
     method: 'POST',

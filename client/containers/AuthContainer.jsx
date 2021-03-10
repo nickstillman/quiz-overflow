@@ -5,14 +5,16 @@ import * as actions from '../actions/authActions';
 import Login from '../components/Login';
 import Signup from '../components/Signup';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   showSignup: state.auth.showSignup,
   message: state.auth.message,
   loginFailure: state.auth.loginFailure,
 });
 
-const mapDispatchToProps = dispatch => ({
-  handleLogin: e => {
+const mapDispatchToProps = (dispatch) => ({
+  handleLogin: (e) => {
+    console.log('handleLogin fired...');
+
     e.preventDefault();
     e.persist();
     dispatch(
@@ -22,7 +24,8 @@ const mapDispatchToProps = dispatch => ({
       })
     );
   },
-  handleSignup: e => {
+  handleSignup: (e) => {
+    console.log('handleSignup fired...');
     e.preventDefault();
     e.persist();
     dispatch(
@@ -32,12 +35,12 @@ const mapDispatchToProps = dispatch => ({
       })
     );
   },
-  goToLogin: e => {
+  goToLogin: (e) => {
     e.preventDefault();
     e.persist();
     dispatch(actions.showSignup(false));
   },
-  goToSignup: e => {
+  goToSignup: (e) => {
     e.preventDefault();
     e.persist();
     dispatch(actions.showSignup(true));
@@ -50,12 +53,12 @@ class AuthContainer extends Component {
   }
 
   render() {
-    let authForm = this.props.showSignup ? ( <Signup {...this.props} /> ) : ( <Login {...this.props} /> );
+    // let authForm = this.props.showSignup ? ( <Signup {...this.props} /> ) : ( <Login {...this.props} /> );
     return (
       <div className="authContainer">
-      {authForm}
+        <Login {...this.props} />
       </div>
-      );
+    );
   }
 }
 
