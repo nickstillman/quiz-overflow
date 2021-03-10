@@ -47,7 +47,6 @@ quizController.getQuestion = (req, res, next) => {
           //choices const holds array of questions
           questionObject.choices = qResult.rows;
           resultArray.push(questionObject);
-          console.log('results: ', resultArray);
           if (resultArray.length === 5) {
             res.locals.questions = resultArray;
             return next();
