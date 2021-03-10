@@ -29,7 +29,7 @@ class App extends React.Component {
     console.log('cookie:', cookies);
 
     // if (cookie) //fire dispatch
-    changeLoginStatus(cookies);
+    // changeLoginStatus(cookies);
     
   }
   
@@ -45,4 +45,6 @@ class App extends React.Component {
   }
 };
 
-export default connect(mapStateToProps)(mapDispatchToProps)(App);
+// export default connect(mapStateToProps)(mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
+
