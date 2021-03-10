@@ -52,7 +52,7 @@ userController.createUser = (req, res, next) => {
 
 userController.verifyUser = (req, res, next) => {
   const { username, password } = req.body;
-
+  
   const verifyUserQuery = `SELECT _id, username FROM users WHERE username = '${username}' AND password = '${password}'`;
   db.query(verifyUserQuery, (err, queryRes) => {
     if (err) {
