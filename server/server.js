@@ -22,75 +22,81 @@ app.get('/', (req, res) => {
   return res.status(200).sendFile(path.resolve(__dirname, '../index.html'));
 });
 
-app.post('/signup',
-userController.createUser,
-cookieController.setSSIDCookie,
-sessionController.startSession,
-(req, res) => {
-  // on failed signup, send boolean false
-  if (res.locals.alreadyExists) {
+app.post(
+  '/signup',
+  userController.createUser,
+  cookieController.setSSIDCookie,
+  sessionController.startSession,
+  (req, res) => {
+    // on failed signup, send boolean false
+    if (res.locals.alreadyExists) {
+      return res
+        .status(200)
+        .json({ message: 'Username already taken!', loggedIn: false });
+    }
+    // on successful signup, send boolean true
+    return res.status(200).json({ message: 'New user added!', loggedIn: true });
+  }
+);
+
+app.post(
+  '/login',
+  userController.verifyUser,
+  cookieController.setSSIDCookie,
+  sessionController.startSession,
+  (req, res) => {
+    if (!res.locals.loggedIn) {
+      // on failed sign in, send boolean false- to update
+      return res
+        .status(200)
+        .json({ message: 'Incorrect username/password', loggedIn: false });
+    }
+    // on successful sign in, send boolean true - to update
     return res
-    .status(200)
-    .json({ message: 'Username already taken!', loggedIn: false });
+      .status(200)
+      .json({ message: 'Log in successful', loggedIn: true });
   }
-  // on successful signup, send boolean true
-  return res.status(200).json({ message: 'New user added!', loggedIn: true });
-});
-
-app.post('/login',
-userController.verifyUser,
-cookieController.setSSIDCookie,
-sessionController.startSession,
-(req, res) => {
-  if (!res.locals.loggedIn) {
-    // on failed sign in, send boolean false- to update
-    return res
-    .status(200)
-    .json({ message: 'Incorrect username/password', loggedIn: false });
-  }
-  // on successful sign in, send boolean true - to update
-  return res
-  .status(200)
-  .json({ message: 'Log in successful', loggedIn: true });
-}
 );
 
-app.get('/quiz-overflow',
-sessionController.isLoggedIn,
-quizController.getQuestion,
-(req, res) => {
-  console.log('session cookieSessionMatch', res.locals.cookieSessionMatch);
-  // after frontend is ready to test, see if we can redirect to '/' in the case a session expires
-  // after logging in or if we need to send a res.locals with empty key values for question and choices.
-  if (!res.locals.cookieSessionMatch) {
-    return res.status(200).json('Invalid session');
+app.get(
+  '/quiz-overflow',
+  sessionController.isLoggedIn,
+  quizController.getQuestion,
+  (req, res) => {
+    console.log('session cookieSessionMatch', res.locals.cookieSessionMatch);
+    // after frontend is ready to test, see if we can redirect to '/' in the case a session expires
+    // after logging in or if we need to send a res.locals with empty key values for question and choices.
+    if (!res.locals.cookieSessionMatch) {
+      return res.status(200).json('Invalid session');
+    }
+    return res.status(200).json(res.locals);
   }
-  return res.status(200).json(res.locals);
-}
 );
 
-app.get('/high-score',
-sessionController.isLoggedIn,
-scoreController.getHighScore,
-(req, res) => {
-  if (!res.locals.cookieSessionMatch) {
-    return res.status(200).json('Invalid session');
+app.get(
+  '/high-score',
+  sessionController.isLoggedIn,
+  scoreController.getHighScore,
+  (req, res) => {
+    if (!res.locals.cookieSessionMatch) {
+      return res.status(200).json('Invalid session');
+    }
+    return res.status(200).json(res.locals);
   }
-  return res.status(200).json(res.locals);
-}
 );
 
-app.put('/high-score',
-sessionController.isLoggedIn,
-scoreController.getHighScore,
-scoreController.updateHighScore,
-scoreController.getHighScore,
-(req, res) => {
-  if (!res.locals.cookieSessionMatch) {
-    return res.status(200).json('Invalid session');
+app.put(
+  '/high-score',
+  sessionController.isLoggedIn,
+  scoreController.getHighScore,
+  scoreController.updateHighScore,
+  scoreController.getHighScore,
+  (req, res) => {
+    if (!res.locals.cookieSessionMatch) {
+      return res.status(200).json('Invalid session');
+    }
+    return res.status(200).json(res.locals);
   }
-  return res.status(200).json(res.locals);
-}
 );
 
 app.use((req, res, next) => {
