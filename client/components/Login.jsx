@@ -8,18 +8,14 @@ class Login extends Component {
   onSubmit(e) {
     e.preventDefault();
     e.persist();
-    console.log(e);
-    console.log(e.target.signUp);
-    console.log('username', e.target.username.value);
-    console.log('password', e.target.password.value);
-    console.log(e);
+    console.log(e.target.id)
   }
 
   render() {
     const errorMsg = <div className="error">{this.props.message}</div>;
     return (
       <div id="login">
-        <form id="loginForm" onSubmit={this.onSubmit}>
+        <form id="loginForm">
           <input
             className="username"
             name="username"
@@ -33,19 +29,25 @@ class Login extends Component {
             type="password"
           />
           <input
+            onClick={this.onSubmit}
             className="submit"
             type="submit"
-            id="signIn1"
+            id="signIn"
             name="signIn"
             value="Sign in"
           />
           <input
+            onClick={this.onSubmit}
             className="submit"
             type="submit"
-            id="signIn2"
+            id="signUp"
             name="signUp"
             value="Sign up"
           />
+
+          {/* Alternative: use a regular button without type='submit' Allows more styling/control of element */}
+          <button id="signInBtn" onClick={this.onSubmit}>Sign in</button>
+          <button id="signUpBtn" onClick={this.onSubmit}>Sign up</button>
         </form>
         <a onClick={this.props.goToSignup} name="#">
           Need an account?
