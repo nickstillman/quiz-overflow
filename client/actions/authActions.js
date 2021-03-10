@@ -12,7 +12,7 @@ import {
 // checkLoginStatus
 export const changeLoginStatus = (bool) => ({
   type: LOGIN_STATUS,
-  payload: { loggedIn: bool },
+  payload: bool,
 });
 
 export const postLogin = ({ username, password }) => (dispatch) => {
