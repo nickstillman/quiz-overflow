@@ -8,22 +8,9 @@ quizController.getQuestion = (req, res, next) => {
     const queryQuestion = `SELECT *
     FROM quiz_question
     ORDER BY RANDOM()
-    LIMIT 5`; // make 10 question at a time for each query. (random in server side or client side)
-    
-    // resultArray = [];
-    // loop i = 0 - 4, index of rows
-    // db.query
-    // questionObject = {};
-    // .then -> use result.rows[i] to make query for id,text,is_correct
-    // add results to questionObject.questionID, .question
-    // make query -> attach result to questionObject.choices
-    // push question object to resultArray
-    // continue loop through questionIDs
-    // put on res.locals.questions
-    
+    LIMIT 5`;
     
     const resultArray = [];
-    
     
     db.query(queryQuestion)
     .then((result) => {
@@ -37,14 +24,11 @@ quizController.getQuestion = (req, res, next) => {
         questionObject.question = randQuestionText;
         questionObject.questionID = randQuestionId;
         
-        console.log(questionObject);
-        
-        //selected id,text, and is correct from quiz questions table, only grabbing questions which match random question ID
         const queryChoices = `SELECT c._id, c.text, c.is_correct FROM quiz_question_choices c WHERE c.quiz_question_id = ${randQuestionId}`;
         
         db.query(queryChoices)
         .then((qResult) => {
-          //choices const holds array of questions
+          //choices key holds array of answer choices
           questionObject.choices = qResult.rows;
           resultArray.push(questionObject);
           if (resultArray.length === 5) {

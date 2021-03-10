@@ -22,6 +22,11 @@ app.get('/', (req, res) => {
   return res.status(200).sendFile(path.resolve(__dirname, '../index.html'));
 });
 
+app.get('/check-session', sessionController.isLoggedIn, (req, res) => {
+    console.log('session cookieSessionMatch', res.locals.cookieSessionMatch);
+    return res.status(200).json(res.locals.cookieSessionMatch);
+  });
+
 app.post(
   '/signup',
   userController.createUser,
