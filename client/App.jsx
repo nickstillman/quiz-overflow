@@ -11,9 +11,9 @@ const mapStateToProps = state => ({
   loggedIn: state.auth.loggedIn,
 });
 
-const mapDispatchToProps = dispatch => ({
-  changeLoginStatus: bool => dispatch(authActions.changeLoginStatus(bool))
-});
+// const mapDispatchToProps = dispatch => ({
+//   changeLoginStatus: bool => dispatch(authActions.changeLoginStatus(bool))
+// });
 
 // Current Goal: on component did mount, check cookies for ssID
 // check for a current action to fire to set loggedIn to true
@@ -23,15 +23,15 @@ class App extends React.Component {
     super(props);
   }
   
-  componentDidMount(){
-    console.log('component mounted!');
-    const cookies = Cookies.get('ssid');
-    console.log('cookie:', cookies);
+  // componentDidMount(){
+  //   console.log('component mounted!');
+  //   const cookies = Cookies.get('ssid');
+  //   console.log('cookie:', cookies);
 
     // if (cookie) //fire dispatch
-    changeLoginStatus(cookies);
+    // changeLoginStatus(cookies);
     
-  }
+  // }
   
 
   render() {
@@ -45,4 +45,4 @@ class App extends React.Component {
   }
 };
 
-export default connect(mapStateToProps)(mapDispatchToProps)(App);
+export default connect(mapStateToProps)(App);

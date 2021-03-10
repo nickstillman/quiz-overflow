@@ -3,8 +3,9 @@ import React from 'react';
 const Card = (props) => (
   // Render a div with a ptag containing card.question -- Render a labeltag and an inputtag
   // Current behavior: whenever form is clicked, iterates through form elements
-  <div className="card">
-    <form onSubmit={(e) => {
+  <div className="cardContainer">
+    <div className="card">
+      <form onSubmit={(e) => {
       e.preventDefault()
       e.persist()
 
@@ -23,7 +24,9 @@ const Card = (props) => (
       };
     }}>
       <div>
-        <label>{props.card.question}</label><br></br><br></br>
+        <label className="questionLabel">{props.card.question}</label><br></br><br></br>
+
+        <span className="questionDivider"></span>
 
         <input className="multipleChoiceAnswer" type="radio" name="quiz" value="choice1" iscorrect={`${props.card.choices[0].is_correct}`}/> {props.card.choices[0].text}<br></br>
         <br></br>
@@ -41,6 +44,7 @@ const Card = (props) => (
           <input className="questionSubmitBtn" type='submit' value='Submit'/>
         </div>
     </form>
+    </div>
   </div> 
 )
 

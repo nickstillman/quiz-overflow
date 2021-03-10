@@ -1,5 +1,7 @@
 $primary-color: lightgray;
 $secondary-color: #9a8c98;
+$custom-black: rgb(58, 58, 58);
+$custom-green: rgb(0, 160, 0);
 $radius: 0.5rem;
 
 $primary-padding: 1rem;
@@ -13,12 +15,40 @@ $fifth: #f2e9e4;
 body {
   font-family: system-ui, -apple-system, 'Helvetica Neue', sans-serif;
   background-color: #fff;
-  color: rgb(58, 58, 58);
+  color: $custom-black;
   font-size: 1rem;
 }
 
 h1 {
   font-size: 3rem;
+  border: 0px solid orange;
+  // text-align: center;
+  // margin-bottom: 0;
+}
+
+.titleContainer {
+  display: flex;
+  justify-content: center;
+  border: 0px solid orange;
+  // align-self: center;
+  position: relative;
+}
+
+.iconContainer {
+  // border: 10px solid orange;
+  width: 3rem;
+  position: relative;
+  top: 2.3rem;
+  display: none;
+}
+
+.iconContainer::after {
+  width: 30rem;
+  background: url('/build/img/sheets.png');
+}
+
+.icon {
+  width: 100%;
 }
 
 .mainContainer {
@@ -32,6 +62,7 @@ h1 {
   padding: $primary-padding;
   border-radius: $radius;
   justify-content: center;
+  width: 100%;
 }
 
 #login,
@@ -40,13 +71,6 @@ h1 {
   padding: 0.8rem;
   background-color: $secondary-color;
   border-radius: $radius;
-}
-
-.card {
-  display: flex;
-  border: 0.4rem solid $secondary-color;
-  border-radius: $radius;
-  padding: 2rem;
 }
 
 .username,
@@ -118,27 +142,43 @@ a:hover {
   cursor: pointer;
 }
 
+.card {
+  display: flex;
+  font-size: 1.5rem;
+  margin: 0;
+  padding: 2rem;
+  border: 0.2rem solid lighten($custom-black, 20%);
+  border-radius: $radius;
+  // box-shadow: 2px 2px 10px 1px rgb(211, 211, 211);
+}
+
+.questionDivider {
+  border: 0.5px solid lighten($custom-black, 55%);
+  display: block;
+  margin-bottom: 1.5rem;
+}
+
 .questionSubmitBtnContainer {
   display: flex;
   justify-content: center;
 }
 
 .questionSubmitBtn {
-  background-color: rgb(0, 160, 0);
+  background-color: $custom-green;
   border: 0;
   color: #fff;
   padding: 0.5rem;
   border-radius: $radius;
   font-size: 1rem;
   width: 8rem;
-  transition: background-color 175ms;
+  transition: background-color 75ms;
 }
 
 .questionSubmitBtn:hover {
   cursor: pointer;
-  background-color: darken(rgb(0, 160, 0), 5%);
+  background-color: darken($custom-green, 5%);
 }
 
 .questionSubmitBtn:active {
-  background-color: $secondary-color;
+  background-color: lighten($custom-green, 5%);
 }

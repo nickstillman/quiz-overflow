@@ -1,7 +1,7 @@
 import * as types from '../actions/actionTypes';
 
 const initialState = {
-  loggedIn: false, // if cookie(SSID) exists then true, else false
+  loggedIn: true, // if cookie(SSID) exists then true, else false
   message: null,
   showSignup: false,
   loginFailure: false,
