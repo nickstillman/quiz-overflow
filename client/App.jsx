@@ -26,12 +26,11 @@ class App extends Component {
     const SSID = Cookies.get('ssid');
     const loginStatus = SSID ? true : false;
 
-    this.props.changeLoginStatus(loginStatus);
+    // this.props.changeLoginStatus(loginStatus);
     // this.props.checkSession();
   }
 
   render() {
-    console.log('status', this.props.loggedIn);
     const auth = this.props.loggedIn ? <CardContainer /> : <AuthContainer />;
 
     return <div className="mainContainer">{auth}</div>;
