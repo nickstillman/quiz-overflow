@@ -53,6 +53,7 @@ const authReducer = (state = initialState, action) => {
       };
     }
     case types.LOGIN_STATUS: {
+      console.log('login status fired', action.payload);
       return {
         ...state,
         loggedIn: action.payload,
