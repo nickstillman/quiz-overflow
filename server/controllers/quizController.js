@@ -10,6 +10,18 @@ quizController.getQuestion = (req, res, next) => {
     ORDER BY RANDOM()
     LIMIT 5`; // make 10 question at a time for each query. (random in server side or client side)
     
+// resultArray = [];
+// loop i = 0 - 4, index of rows
+// db.query
+// questionObject = {};
+// .then -> use result.rows[i] to make query for id,text,is_correct
+// add results to questionObject.questionID, .question
+// make query -> attach result to questionObject.choices
+// push question object to resultArray
+// continue loop through questionIDs
+// put on res.locals.questions
+
+
     db.query(queryQuestion)
     .then((result) => {
       //create const to hold value of question ID
