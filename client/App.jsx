@@ -5,6 +5,7 @@ import AuthContainer from './containers/AuthContainer';
 import CardContainer from './containers/CardContainer';
 import * as authActions from './actions/authActions';
 import PlayerStats from './components/PlayerStats';
+import { getNewCard } from './actions/actions';
 
 const mapStateToProps = (state) => ({
   loggedIn: state.auth.loggedIn,

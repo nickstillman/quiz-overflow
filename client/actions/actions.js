@@ -2,26 +2,20 @@ import { bindActionCreators } from 'redux';
 import * as types from './actionTypes';
 
 export const getNewCard = () => (dispatch) => {
-  dispatch({ type: types.NEW_CARD_REQUEST });
+  console.log('actions getNewDeck fired...');
   fetch('/quiz-overflow')
     .then((res) => res.json())
-    .then((res) => {
-      let card = {
-        question: res.question,
-        choices: [
-          res.choices[0],
-          res.choices[1],
-          res.choices[2],
-          res.choices[3],
-        ],
-      };
-      console.log('Card from db', card);
-      return card;
+    .then((data) => {
+      console.log('deck', data.questions);
+      const deck = data.questions;
+      return deck;
     })
-    .then((card) =>
+    .then((deck) =>
+      // we're receiving cards array
+      // this is where we should probably iterate here or in state
       dispatch({
-        type: types.NEW_CARD_RECEIVED,
-        payload: card,
+        type: types.NEW_DECK_RECEIVED,
+        payload: deck,
       })
     );
 };
