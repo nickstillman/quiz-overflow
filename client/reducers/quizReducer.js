@@ -63,7 +63,8 @@ const quizReducer = (state = initialState, action) => {
     }
 
     case types.HIGHSCORE_RECEIVED: {
-      console.log('highscore payload', action.payload);
+      console.log('quizReducer:HIGHSCORE_RECEIVED');
+      console.log('payload', action.payload);
       let highScore = action.payload;
       return {
         ...state,
@@ -72,10 +73,6 @@ const quizReducer = (state = initialState, action) => {
     }
 
     case types.HIGHSCORE_UPDATED: {
-      return { ...state };
-    }
-
-    case types.UPDATING_HIGHSCORE: {
       return { ...state };
     }
 

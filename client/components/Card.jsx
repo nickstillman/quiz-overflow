@@ -1,90 +1,68 @@
 import React from 'react';
 import { decode } from 'html-entities';
 
-
 const Card = (props) => {
-
+  // console.log('Card:render fired...');
   const choices = props.card.choices;
 
   const onSubmit = (e) => {
-    console.log('onSubmit fired...');
+    // console.log('Card:onSubmit fired...');
     e.preventDefault();
-    e.persist();
 
-    for (let i = 0; i < 4; i++) {
-      if (e.target[i].checked) {
-        if (e.target[i].attributes.iscorrect.value === 'true') {
-          props.correctChoice();
-          console.log('correct');
-          if (props.currentScore > props.highScore) {
-            props.newHighScore(props.currentScore);
-            props.updateHighScore(props.currentScore);
-            console.log('New Highscore!!!');
-          }
-        } else console.log('wrong');
+    let selected = document.querySelector('input[name="quiz"]:checked');
+    if (selected) {
+      selected = selected.id.slice(-1);
+
+      if (choices[selected].is_correct) {
+        props.correctChoice(props.currentScore, props.highScore);
+        // props.getNewCard(props.deck);
+
+        // console.log('AAAAAAAAAAAAAAAAAA', props.currentScore, props.highScore);
+        // if (props.currentScore > props.highScore) {
+        //   props.newHighScore(props.currentScore);
+        //   props.updateHighScore(props.currentScore);
+        //   console.log('New Highscore!!!');
+        // }
       }
+      props.getNewCard(props.deck);
     }
   };
 
+  let questArr = [];
+  for (let i = 0; i < 4; i++) {
+    questArr.push(
+      <div key={`question${i}`}>
+        <input
+          className="multipleChoice"
+          type="radio"
+          name="quiz"
+          id={`choice${i}`}
+        />
+        <label htmlFor={`choice${i}`}>{decode(choices[i].text)}</label>
+      </div>
+    );
+  }
 
   return (
     <div className="card">
-      <form onSubmit={(e) => {onSubmit(e)}}>
-        <div className='questionContainer'>
+      <form
+        onSubmit={(e) => {
+          onSubmit(e);
+        }}
+      >
+        <div className="questionContainer">
           <div className="questionLabel">{decode(props.card.question)}</div>
-          <span className="questionDivider"></span>
-          <div>
-            <input
-              className="multipleChoice"
-              type="radio"
-              name="quiz"
-              id="choice1"
-              iscorrect={`${choices[0].is_correct}`}
-            /><label for="choice1">{decode(choices[0].text)}</label>
-          </div>
-          <div>
-            <input
-              className="multipleChoice"
-              type="radio"
-              name="quiz"
-              id="choice2"
-              iscorrect={`${choices[1].is_correct}`}
-            /><label for="choice2">{decode(choices[1].text)}</label>
-          </div>
-          <div>
-            <input
-              className="multipleChoice"
-              type="radio"
-              name="quiz"
-              id="choice3"
-              iscorrect={`${choices[2].is_correct}`}
-            /><label for="choice3">{decode(choices[2].text)}</label>
-          </div>
-          <div>
-            <input
-              className="multipleChoice"
-              type="radio"
-              name="quiz"
-              id="choice4"
-              iscorrect={`${choices[3].is_correct}`}
-            /><label for="choice4">{decode(choices[3].text)}</label>
-          </div>
+          <hr className="questionDivider"></hr>
+          {questArr}
         </div>
         <br />
 
         <div className="questionSubmitBtnContainer">
           <input className="questionSubmitBtn" type="submit" value="Submit" />
-          <input
-            onClick={(e) => props.getNewCard(props.deck)}
-            className="questionSubmitBtn"
-            type="submit"
-            value="TEMP"
-          />
         </div>
       </form>
     </div>
-  )
-}
-
+  );
+};
 
 export default Card;
