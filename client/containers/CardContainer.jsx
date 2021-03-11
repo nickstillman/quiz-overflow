@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Card from '../components/Card';
-import Feedback from '../components/Feedback';
+import CheckAnswer from '../components/CheckAnswer';
 
 import {
   correctChoice,
@@ -19,7 +19,7 @@ const mapStateToProps = (state) => ({
   correctAnswers: state.quiz.correctAnswers,
   deck: state.quiz.deck,
   // new component?
-  // currentScore: state.quiz.currentScore,
+  currentScore: state.quiz.currentScore,
   // highScore: state.quiz.highScore,
 });
 
@@ -61,7 +61,7 @@ class CardContainer extends Component {
             getNewCard={this.props.getNewCard}
             deck={this.props.deck}
           />
-        <Feedback currentScore={this.props.currentScore}/>
+        <CheckAnswer currentScore={this.props.currentScore}/>
         </div>
         <PlayerStats className="playerStatsContainer"/>
       </div>
