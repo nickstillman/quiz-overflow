@@ -1,8 +1,6 @@
 import React from 'react';
 
 const Card = (props) => (
-  // Render a div with a ptag containing card.question -- Render a labeltag and an inputtag
-  // Current behavior: whenever form is clicked, iterates through form elements
   <div className="cardContainer">
     <div className="card">
       <form onSubmit={(e) => {
@@ -15,6 +13,8 @@ const Card = (props) => (
             props.correctChoice(1) 
             console.log('correct')
             if(props.currentScore > props.highScore) {
+              // why two calls here? can they be grouped
+              // highScore being updated here
               props.newHighScore(props.currentScore)
               props.updateHighScore(props.currentScore)
               console.log('New Highscore!!!')
@@ -24,9 +24,17 @@ const Card = (props) => (
       };
     }}>
       <div>
-        <label className="questionLabel">{props.card.question}</label><br></br><br></br>
+        {/* <label className="questionLabel">{props.card.question}</label><br></br><br></br> */}
+
+        <div className="questionLabel">
+          {props.card.question}
+        </div>
 
         <span className="questionDivider"></span>
+
+        {/* <div className="multipleChoiceAnswer" iscorrect={`${props.card.choices[0].is_correct}`}> 
+          {props.card.choices[0].text}
+        </div> */}
 
         <input className="multipleChoiceAnswer" type="radio" name="quiz" value="choice1" iscorrect={`${props.card.choices[0].is_correct}`}/> {props.card.choices[0].text}<br></br>
         <br></br>
