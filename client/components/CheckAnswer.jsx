@@ -1,8 +1,5 @@
 import React from 'react';
 
-let cards = -1;
-let score = 0;
-
 class CheckAnswer extends React.Component{
   constructor(props){
     super(props);
