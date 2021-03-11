@@ -61,7 +61,7 @@ class CardContainer extends Component {
             getNewCard={this.props.getNewCard}
             deck={this.props.deck}
           />
-        <CheckAnswer currentScore={this.props.currentScore}/>
+        <CheckAnswer card={this.props.card} currentScore={this.props.currentScore}/>
         </div>
         <PlayerStats className="playerStatsContainer"/>
       </div>
