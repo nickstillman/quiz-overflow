@@ -14,7 +14,7 @@ $fifth: #f2e9e4;
 
 body {
   font-family: system-ui, -apple-system, 'Helvetica Neue', sans-serif;
-  background-color: #fff;
+  background-color: $fifth;
   color: $custom-black;
   font-size: 1rem;
 }
@@ -46,32 +46,70 @@ h1 {
 }
 
 .authContainer {
-  display: inline-flex;
+  display: flex;
   background-color: #4a4e69;
   padding: $primary-padding;
   border-radius: $radius;
   justify-content: center;
-  width: 100%;
+  width: 45em;
 }
 
-#login,
-#signup {
-  display: inline-block;
-  padding: 0.8rem;
+#login {
+  display: flex;
+  flex-direction: column;
+  // align-items: center;
+  // justify-content: center;
+  padding: 0.2em;
   background-color: $secondary-color;
   border-radius: $radius;
+  width: 15em;
+  height: 11.4em;
 }
 
-.username,
-.password {
+.loginField {
   display: flex;
-  margin: 5px;
-  border-radius: 4px;
-  border-width: 0.5px;
-  border-color: lightgray;
-  width: 150px;
-  margin-bottom: 5px;
-  background-color: #fff;
+  flex-direction: column;
+  margin: 0.2em;
+  padding: 0.5em;
+  border-radius: $radius;
+  background-color: $fourth;
+}
+
+#username,
+#password {
+  height: 1.5em;
+  border-radius: $radius / 2;
+  border: 1px solid $second;
+}
+
+#username:focus,
+#password:focus {
+  outline: 1px solid $second;
+}
+
+.loginButtons {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 0.5em;
+}
+
+#signInBtn,
+#signUpBtn {
+  font-size: 1em;
+  height: 1.5em;
+  border: 1px solid $second;
+  border-radius: $radius / 2;
+  cursor: pointer;
+}
+
+#signInBtn:hover,
+#signUpBtn:hover {
+  background-color: lighten($fourth, 50%);
+}
+
+#signInBtn:focus,
+#signUpBtn:focus {
+  outline: none;
 }
 
 .submit {
@@ -114,17 +152,32 @@ a:hover {
   cursor: pointer;
 }
 
-.errorMessage {
-  margin-top: 10px;
-  margin-left: 5px;
-  color: #ff97a8;
-  font-size: 0.8rem;
+.loginFooter {
+  display: flex;
+  justify-content: center;
+  margin: 0.2em;
+  padding: 0.5em;
+  font-size: 0.8em;
+  background-color: #f2e9e4;
+  border-radius: $radius;
 }
 
 .error {
-  padding: 5px;
-  background-color: #fff;
+  color: #f25c54;
+}
+
+.guest {
+  background-color: darken(#50c467, 10%);
+  border: 1px solid $second;
   border-radius: $radius;
+  padding: 1px 15px;
+  font-size: 1.5em;
+  color: $fifth;
+  cursor: pointer;
+}
+
+.guest:hover {
+  background-color: darken(#50c467, 5%);
 }
 
 .multipleChoiceAnswer:hover {

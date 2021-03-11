@@ -3,22 +3,46 @@ import React, { Component } from 'react';
 class Login extends Component {
   constructor(props) {
     super(props);
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  onSubmit(e) {
+    e.preventDefault();
+
+    if (e.target.id === 'signInBtn' || e.target.id === 'guest') {
+      this.props.handleLogin(e);
+    } else {
+      this.props.handleSignUp(e);
+    }
   }
 
   render() {
-    const errorMsg = <div className="error">{this.props.message}</div>;
+    console.log(this.props);
+    const errorMsg = <span className="error">{this.props.message}</span>;
+    const guestLogin = (
+      <span className="guest" id="guest" onClick={this.onSubmit}>
+        Play as a Guest
+      </span>
+    );
+
     return (
       <div id="login">
-        <form id="loginForm" onSubmit={this.props.handleLogin}>
-          <input className="username" name="username" placeholder="Username" type="text" />
-          <input className="password" name="password" placeholder="Password" type="password" />
-          <input className="submit" type="submit" name="submit" value="Sign in" />
+        <form className="loginField">
+          <input id="username" placeholder="Username" type="text" />
+          <br />
+          <input id="password" placeholder="Password" type="password" />
+          <br />
+          <div className="loginButtons">
+            <button id="signInBtn" onClick={this.onSubmit}>
+              Log In
+            </button>
+            <button id="signUpBtn" onClick={this.onSubmit}>
+              Sign Up
+            </button>
+          </div>
         </form>
-        <a onClick={this.props.goToSignup} name="#">
-          Need an account?
-        </a>
-        <div className="errorMessage">
-        {this.props.loginFailure ? errorMsg : ''}
+        <div className="loginFooter">
+          {this.props.loginFailure ? errorMsg : guestLogin}
         </div>
       </div>
     );

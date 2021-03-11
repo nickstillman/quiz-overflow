@@ -15,6 +15,11 @@ export const changeLoginStatus = (bool) => ({
   payload: bool,
 });
 
+export const checkSession = () => (dispatch) => {
+  console.log('checkSession fired...');
+  fetch('/quiz-overflow');
+};
+
 export const postLogin = ({ username, password }) => (dispatch) => {
   fetch('/login', {
     method: 'POST',
@@ -24,16 +29,16 @@ export const postLogin = ({ username, password }) => (dispatch) => {
       password,
     }),
   })
-  .then((data) => data.json())
-  .then((data) => {
-    if (data && data.loggedIn !== undefined) {
-      data.loginFailure = !data.loggedIn ? true : false;
-      dispatch(postLoginSuccess(data));
-    }
-  })
-  .catch((data) => {
-    dispatch(postLoginFailure(data));
-  });
+    .then((data) => data.json())
+    .then((data) => {
+      if (data && data.loggedIn !== undefined) {
+        data.loginFailure = !data.loggedIn ? true : false;
+        dispatch(postLoginSuccess(data));
+      }
+    })
+    .catch((data) => {
+      dispatch(postLoginFailure(data));
+    });
 };
 
 const postLoginSuccess = (payload) => ({
@@ -60,16 +65,16 @@ export const postSignup = ({ username, password }) => (dispatch) => {
       password,
     }),
   })
-  .then((data) => data.json())
-  .then((data) => {
-    if (data && data.loggedIn !== undefined) {
-      data.loginFailure = !data.loggedIn ? true : false;
-      dispatch(postSignupSuccess(data));
-    }
-  })
-  .catch((data) => {
-    dispatch(postSignupFailure(data));
-  });
+    .then((data) => data.json())
+    .then((data) => {
+      if (data && data.loggedIn !== undefined) {
+        data.loginFailure = !data.loggedIn ? true : false;
+        dispatch(postSignupSuccess(data));
+      }
+    })
+    .catch((data) => {
+      dispatch(postSignupFailure(data));
+    });
 };
 
 const postSignupRequest = () => ({
