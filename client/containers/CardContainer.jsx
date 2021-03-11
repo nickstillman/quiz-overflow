@@ -52,7 +52,7 @@ class CardContainer extends Component {
             </div>
           
             {/* Get new question */}  
-            {/* <button className="getNewQuestionBtn" onClick={() => this.props.getNewCard()}>Gets Another Question</button> */}
+            <button className="getNewQuestionBtn" onClick={() => this.props.getNewCard()}>Gets Another Question</button>
           
             <PlayerStats className="playerStatsContainer"/>          
           </div>
