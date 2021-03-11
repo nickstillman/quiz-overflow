@@ -1,6 +1,9 @@
 import React from 'react';
+import { decode } from 'html-entities';
 
-const Card = (props) => (
+
+const Card = (props) => {
+  return (
   <div className="cardContainer">
     <div className="card">
       <form
@@ -27,7 +30,7 @@ const Card = (props) => (
       >
         <div>
           {/* <label className="questionLabel">{props.card.question}</label><br></br><br></br> */}
-          <div className="questionLabel">{props.card.question}</div>
+          <div className="questionLabel">{decode(props.card.question)}</div>
           <span className="questionDivider"></span>
           {/* <div className="multipleChoiceAnswer" iscorrect={`${props.card.choices[0].is_correct}`}> 
           {props.card.choices[0].text}
@@ -39,7 +42,7 @@ const Card = (props) => (
             value="choice1"
             iscorrect={`${props.card.choices[0].is_correct}`}
           />{' '}
-          {props.card.choices[0].text}
+          {decode(props.card.choices[0].text)}
           <br></br>
           <br></br>
           <input
@@ -49,7 +52,7 @@ const Card = (props) => (
             value="choice2"
             iscorrect={`${props.card.choices[1].is_correct}`}
           />{' '}
-          {props.card.choices[1].text}
+          {decode(props.card.choices[1].text)}
           <br></br>
           <br></br>
           <input
@@ -59,7 +62,7 @@ const Card = (props) => (
             value="choice3"
             iscorrect={`${props.card.choices[2].is_correct}`}
           />{' '}
-          {props.card.choices[2].text}
+          {decode(props.card.choices[2].text)}
           <br></br>
           <br></br>
           <input
@@ -69,7 +72,7 @@ const Card = (props) => (
             value="choice4"
             iscorrect={`${props.card.choices[3].is_correct}`}
           />{' '}
-          {props.card.choices[3].text}
+          {decode(props.card.choices[3].text)}
           <br></br>
         </div>
         <br></br>
@@ -86,6 +89,8 @@ const Card = (props) => (
       </form>
     </div>
   </div>
-);
+  )
+}
+
 
 export default Card;

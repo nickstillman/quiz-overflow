@@ -27,6 +27,8 @@ class Login extends Component {
 
     return (
       <div className="login">
+          <div className="correctFeedback">✓</div>
+          <div className="incorrectFeedback">X</div>
         <form className="loginField">
           <input id="username" className="userName" placeholder="username..." type="text" />
           <br />

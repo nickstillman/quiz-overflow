@@ -60,8 +60,8 @@ class CardContainer extends Component {
             deck={this.props.deck}
           />
         </div>
-
         <PlayerStats className="playerStatsContainer" />
+        {/* feedback */}
       </div>
     );
   }
