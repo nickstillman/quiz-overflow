@@ -9,6 +9,8 @@ class Login extends Component {
     e.preventDefault();
     e.persist();
     console.log(e.target.id)
+    console.log(e.target.parentNode.children[0].value);
+    console.log(e.target.parentNode.children[1].value);
   }
 
   render() {

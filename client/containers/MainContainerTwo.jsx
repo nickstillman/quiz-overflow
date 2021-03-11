@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PlayerStats from '../components/PlayerStats';
 import AuthContainer from './AuthContainer';
 import CardContainer from './CardContainer';
 
@@ -14,8 +15,11 @@ const MainContainer = props => {
     <AuthContainer />
   );
 
-  return <div className="mainContainer">{auth}</div>;
-
+  return (
+    <div className="mainContainer">
+      {auth}
+    </div>
+  )
 };
 
 export default connect(mapStateToProps)(MainContainer);

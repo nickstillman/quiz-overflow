@@ -4,6 +4,7 @@ import Cookies from 'js-cookie';
 import AuthContainer from './containers/AuthContainer';
 import CardContainer from './containers/CardContainer';
 import * as authActions from './actions/authActions';
+import PlayerStats from './components/PlayerStats';
 
 const mapStateToProps = (state) => ({
   // from: the store
@@ -34,7 +35,11 @@ class App extends Component {
     console.log('status', this.props.loggedIn);
     const auth = this.props.loggedIn ? <CardContainer /> : <AuthContainer />;
 
-    return <div className="mainContainer">{auth}</div>;
+    return (
+      <div className="mainContainer">
+        {auth}
+      </div>
+    )
   }
 }
 
