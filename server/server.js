@@ -73,7 +73,7 @@ app.post(
         console.log('session cookieSessionMatch', res.locals.cookieSessionMatch);
         // after frontend is ready to test, see if we can redirect to '/' in the case a session expires
         // after logging in or if we need to send a res.locals with empty key values for question and choices.
-
+        
         if (!res.locals.cookieSessionMatch) {
           return res.status(200).json('Invalid session');
         }
@@ -83,13 +83,13 @@ app.post(
       
       app.get(
         '/quiz-overflowDB',
-        sessionController.isLoggedIn,
+        // sessionController.isLoggedIn,
         quizControllerDB.getQuestion,
         (req, res) => {
           console.log('session cookieSessionMatch', res.locals.cookieSessionMatch);
-          if (!res.locals.cookieSessionMatch) {
-            return res.status(200).json('Invalid session');
-          }
+          // if (!res.locals.cookieSessionMatch) {
+          //   return res.status(200).json('Invalid session');
+          // }
           return res.status(200).json(res.locals);
         }
         )
@@ -111,7 +111,7 @@ app.post(
             sessionController.isLoggedIn,
             scoreController.getHighScore,
             scoreController.updateHighScore,
-            scoreController.getHighScore,
+            // scoreController.getHighScore,
             (req, res) => {
               if (!res.locals.cookieSessionMatch) {
                 return res.status(200).json('Invalid session');
@@ -123,6 +123,12 @@ app.post(
             app.post('/questions', questionController.addQuestion, (req, res) => {
               return res.status(200).send(res.locals.addedMsg);
             })
+            
+            app.get('/leaderboard', scoreController.getLeaderboard, (req, res) => {
+              // error check?
+              return res.status(200).json(res.locals.leaderboard);
+            }
+            )
             
             app.use((req, res, next) => {
               return res.status(404).send('Not Found');
@@ -136,3 +142,4 @@ app.post(
             app.listen(3000, () => {
               console.log('Server listening on port 3000');
             });
+            
