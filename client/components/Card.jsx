@@ -3,79 +3,76 @@ import { decode } from 'html-entities';
 
 
 const Card = (props) => {
-  return (
-  <div className="cardContainer">
-    <div className="card">
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          e.persist();
 
-          for (let i = 0; i < 4; i++) {
-            if (e.target[i].checked) {
-              if (e.target[i].attributes.iscorrect.value === 'true') {
-                props.correctChoice();
-                console.log('correct');
-                if (props.currentScore > props.highScore) {
-                  // why two calls here? can they be grouped
-                  // highScore being updated here
-                  props.newHighScore(props.currentScore);
-                  props.updateHighScore(props.currentScore);
-                  console.log('New Highscore!!!');
-                }
-              } else console.log('wrong');
-            }
+  const choices = props.card.choices;
+
+  const onSubmit = (e) => {
+    console.log('onSubmit fired...');
+    e.preventDefault();
+    e.persist();
+
+    for (let i = 0; i < 4; i++) {
+      if (e.target[i].checked) {
+        if (e.target[i].attributes.iscorrect.value === 'true') {
+          props.correctChoice();
+          console.log('correct');
+          if (props.currentScore > props.highScore) {
+            // why two calls here? can they be grouped
+            // highScore being updated here
+            props.newHighScore(props.currentScore);
+            props.updateHighScore(props.currentScore);
+            console.log('New Highscore!!!');
           }
-        }}
-      >
-        <div>
-          {/* <label className="questionLabel">{props.card.question}</label><br></br><br></br> */}
+        } else console.log('wrong');
+      }
+    }
+  };
+
+
+  return (
+    <div className="card">
+      <form onSubmit={(e) => {onSubmit(e)}}>
+        <div className='questionContainer'>
           <div className="questionLabel">{decode(props.card.question)}</div>
           <span className="questionDivider"></span>
-          {/* <div className="multipleChoiceAnswer" iscorrect={`${props.card.choices[0].is_correct}`}> 
-          {props.card.choices[0].text}
-        </div> */}
-          <input
-            className="multipleChoiceAnswer"
-            type="radio"
-            name="quiz"
-            value="choice1"
-            iscorrect={`${props.card.choices[0].is_correct}`}
-          />{' '}
-          {decode(props.card.choices[0].text)}
-          <br></br>
-          <br></br>
-          <input
-            className="multipleChoiceAnswer"
-            type="radio"
-            name="quiz"
-            value="choice2"
-            iscorrect={`${props.card.choices[1].is_correct}`}
-          />{' '}
-          {decode(props.card.choices[1].text)}
-          <br></br>
-          <br></br>
-          <input
-            className="multipleChoiceAnswer"
-            type="radio"
-            name="quiz"
-            value="choice3"
-            iscorrect={`${props.card.choices[2].is_correct}`}
-          />{' '}
-          {decode(props.card.choices[2].text)}
-          <br></br>
-          <br></br>
-          <input
-            className="multipleChoiceAnswer"
-            type="radio"
-            name="quiz"
-            value="choice4"
-            iscorrect={`${props.card.choices[3].is_correct}`}
-          />{' '}
-          {decode(props.card.choices[3].text)}
-          <br></br>
+          <div>
+            <input
+              className="multipleChoice"
+              type="radio"
+              name="quiz"
+              id="choice1"
+              iscorrect={`${choices[0].is_correct}`}
+            /><label for="choice1">{decode(choices[0].text)}</label>
+          </div>
+          <div>
+            <input
+              className="multipleChoice"
+              type="radio"
+              name="quiz"
+              id="choice2"
+              iscorrect={`${choices[1].is_correct}`}
+            /><label for="choice2">{decode(choices[1].text)}</label>
+          </div>
+          <div>
+            <input
+              className="multipleChoice"
+              type="radio"
+              name="quiz"
+              id="choice3"
+              iscorrect={`${choices[2].is_correct}`}
+            /><label for="choice3">{decode(choices[2].text)}</label>
+          </div>
+          <div>
+            <input
+              className="multipleChoice"
+              type="radio"
+              name="quiz"
+              id="choice4"
+              iscorrect={`${choices[3].is_correct}`}
+            /><label for="choice4">{decode(choices[3].text)}</label>
+          </div>
         </div>
-        <br></br>
+        <br />
 
         <div className="questionSubmitBtnContainer">
           <input className="questionSubmitBtn" type="submit" value="Submit" />
@@ -88,7 +85,6 @@ const Card = (props) => {
         </div>
       </form>
     </div>
-  </div>
   )
 }
 

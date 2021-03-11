@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Card from '../components/Card';
+import Feedback from '../components/Feedback';
+
 import {
   correctChoice,
   getNewDeck,
@@ -59,9 +61,9 @@ class CardContainer extends Component {
             getNewCard={this.props.getNewCard}
             deck={this.props.deck}
           />
+        <Feedback currentScore={this.props.currentScore}/>
         </div>
-        <PlayerStats className="playerStatsContainer" />
-        {/* feedback */}
+        <PlayerStats className="playerStatsContainer"/>
       </div>
     );
   }

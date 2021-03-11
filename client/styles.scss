@@ -205,7 +205,11 @@ a:hover {
   cursor: pointer;
 }
 
-.multipleChoiceAnswer:hover {
+.multipleChoice {
+  margin: 1rem;
+}
+
+.multipleChoice:hover {
   cursor: pointer;
 }
 
@@ -303,6 +307,12 @@ a:hover {
   background-color: lighten($custom-green, 5%);
 }
 
+.feedbackContainer {
+  display: flex;
+  justify-content: space-around;
+  border: 1px solid orange;
+}
+
 .correctFeedback {
   font-size: 3rem;
   font-weight: bold;
@@ -315,7 +325,7 @@ a:hover {
   width: 5rem;
   background-color: $custom-green;
   border-radius: 100px;
-  // animation: fade 2s linear forwards;
+  animation: fade 2s linear forwards;
 }
 
 .incorrectFeedback {
