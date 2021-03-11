@@ -4,6 +4,7 @@ import Cookies from 'js-cookie';
 import AuthContainer from './containers/AuthContainer';
 import CardContainer from './containers/CardContainer';
 import * as authActions from './actions/authActions';
+import PlayerStats from './components/PlayerStats';
 
 const mapStateToProps = (state) => ({
   loggedIn: state.auth.loggedIn,

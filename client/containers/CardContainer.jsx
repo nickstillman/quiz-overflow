@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Card from '../components/Card';
 import { correctChoice, getNewCard, updateHighScore, getHighScore, newHighScore } from '../actions/actions';
+import PlayerStats from '../components/PlayerStats';
 
 const mapStateToProps = state => ({
   card: state.quiz.card,
   cardsThisSession: state.quiz.cardsThisSession,
   correctAnswers: state.quiz.correctAnswers,
+  // new component?
   currentScore: state.quiz.currentScore,
   highScore: state.quiz.highScore,
 });
@@ -29,25 +31,32 @@ class CardContainer extends Component {
       }
 
   render() {
-      console.log('props in cardcontainer', this.props)
       return(
-          <div className="cardContainer">
-              <Card
-              currentScore={this.props.currentScore}
-              newHighScore={this.props.newHighScore}
-              highScore={this.props.highScore}
-              updateHighScore={this.props.updateHighScore}
-              correctAnswers={this.props.correctAnswers}
-              correctChoice={this.props.correctChoice}
-              cardsThisSession={this.props.cardsThisSession}
-              card={this.props.card}
-              />
-          <div>
-          <p>High Score: {this.props.highScore}</p>
-          <p>Current Score: {this.props.currentScore}</p>
-          <button onClick={() => this.props.getNewCard()}>Gets Another Question</button>
+        // <div>
+
+          <div className="cardAndStatsContainer">
+            <PlayerStats className="playerStatsContainer invisible"/>
+          
+            {/* Card Container */}
+            <div className="cardContainer">
+                <Card
+                currentScore={this.props.currentScore}
+                newHighScore={this.props.newHighScore}
+                highScore={this.props.highScore}
+                updateHighScore={this.props.updateHighScore}
+                correctAnswers={this.props.correctAnswers}
+                correctChoice={this.props.correctChoice}
+                // cardsThisSession={this.props.cardsThisSession}
+                card={this.props.card}
+                />
+            </div>
+          
+            {/* Get new question */}  
+            {/* <button className="getNewQuestionBtn" onClick={() => this.props.getNewCard()}>Gets Another Question</button> */}
+          
+            <PlayerStats className="playerStatsContainer"/>          
           </div>
-          </div>
+        // </div>
       )
   }
 }
