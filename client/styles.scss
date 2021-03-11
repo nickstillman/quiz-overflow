@@ -75,6 +75,7 @@ h1 {
 
 .userName,
 .password {
+  padding: 0.15rem 0.3rem;
   color: lighten($custom-black, 10%);
   line-height: 2.5rem;
   width: 15rem;
@@ -127,7 +128,7 @@ h1 {
 }
 
 .signInBtn:active {
-  background-color: lighten(steelblue, 5%);
+  background-color: darken(steelblue, 5%);
 }
 
 .signInBtn,
@@ -227,7 +228,7 @@ a:hover {
   margin: 0;
   width: 100%;
   padding: 2rem;
-  border: 0.2rem solid lighten($custom-black, 20%);
+  border: 0.1rem solid rgb(187, 187, 187);
   border-radius: $radius;
 }
 
