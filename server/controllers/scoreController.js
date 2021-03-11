@@ -9,11 +9,13 @@ scoreController.getHighScore = (req, res, next) => {
       if (err) {
         console.log('error in getHighScore: ', err);
         return next(err);
+      } else if (!queryRes.rows[0]) {
+        res.locals.highScore = 0;
       } else {
         console.log('high score: ', queryRes.rows[0].high_score);
         res.locals.highScore = queryRes.rows[0].high_score;
-        return next();
       }
+      return next();
     });
   } else {
     return next();
@@ -32,6 +34,7 @@ scoreController.updateHighScore = (req, res, next) => {
           return next(err);
         } else {
           console.log('updated score');
+          res.locals.high_score = res.body.score;
           return next();
         }
       });
@@ -42,5 +45,26 @@ scoreController.updateHighScore = (req, res, next) => {
     return next();
   }
 };
+
+scoreController.getLeaderboard = (req, res, next) => {
+  const leaderboardQuery = 'SELECT username, high_score FROM high_score h JOIN users u ON u._id = h.users_id ORDER BY high_score DESC LIMIT 10';
+  
+  db.query(leaderboardQuery)
+  .then(data => {
+    console.log(data.rows);
+    res.locals.leaderboard = data.rows;
+    return next();
+  })
+  .catch(err => {
+    if (err) {
+      console.log('error in getLeaderboard: ', err);
+      return next(err);
+    }
+  });
+};
+
+
+
+
 
 module.exports = scoreController;

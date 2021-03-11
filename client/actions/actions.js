@@ -2,7 +2,7 @@ import * as types from './actionTypes';
 
 export const getNewDeck = () => (dispatch) => {
   console.log('actions:getNewDeck fired...');
-  fetch('/quiz-overflow')
+  fetch('/quiz-overflowDB')
     .then((res) => res.json())
     .then((data) => {
       const deck = data.questions;
