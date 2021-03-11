@@ -1,4 +1,3 @@
-const db = require('../models/quizModels');
 const fetch = require('node-fetch');
 
 const quizController = {};
@@ -49,13 +48,13 @@ quizController.getQuestion = (req, res, next) => {
         questions.push(...output);
         
         res.locals.questions = questions.splice(questions.length - 5);
-        console.log(res.locals.questions);
+        // console.log(res.locals.questions);
         return next();        
       })
       
     } else {    
       res.locals.questions = questions.splice(questions.length - 5);
-      console.log('rest: ',res.locals.questions[0]['choices'] )
+      // console.log('rest: ',res.locals.questions[0]['choices'] )
       anyMoreQuestions = !!questions.length
       return next();
     }
