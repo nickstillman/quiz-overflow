@@ -31,7 +31,6 @@ quizController.getQuestion = (req, res, next) => {
           const { question, correct_answer, incorrect_answers } = el;
           const choices = [];
           choices.push({text: correct_answer, is_correct: true});
-          console.log('incorrect: ', incorrect_answers);
           const wrong = incorrect_answers.map(ele => {
             return {text: ele, is_correct: false};
           });
