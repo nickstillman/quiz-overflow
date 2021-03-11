@@ -3,10 +3,11 @@ import { connect } from 'react-redux';
 import Card from '../components/Card';
 import {
   correctChoice,
-  getNewCard,
+  getNewDeck,
   updateHighScore,
   getHighScore,
   newHighScore,
+  getNewCard,
 } from '../actions/actions';
 import PlayerStats from '../components/PlayerStats';
 
@@ -21,11 +22,12 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  getNewCard,
+  getNewDeck,
   correctChoice,
   getHighScore,
   updateHighScore,
   newHighScore,
+  getNewCard,
 };
 
 class CardContainer extends Component {
@@ -34,21 +36,17 @@ class CardContainer extends Component {
   }
 
   componentDidMount() {
-    console.log('CardContainer componentDidMount fired...');
+    // console.log('CardContainer componentDidMount fired...');
     this.props.getHighScore();
-    this.props.getNewCard();
+    this.props.getNewDeck();
   }
 
   render() {
-    console.log('CardContainer render fired...');
-    console.log('deck', this.props.deck);
+    // console.log('CardContainer render fired...');
     return (
-      // <div>
-
       <div className="cardAndStatsContainer">
         <PlayerStats className="playerStatsContainer invisible" />
 
-        {/* Card Container */}
         <div className="cardContainer">
           <Card
             currentScore={this.props.currentScore}
@@ -57,19 +55,14 @@ class CardContainer extends Component {
             updateHighScore={this.props.updateHighScore}
             correctAnswers={this.props.correctAnswers}
             correctChoice={this.props.correctChoice}
-            // cardsThisSession={this.props.cardsThisSession}
-            // card={this.props.card}
-            card={this.props.deck[0] || this.props.card}
+            card={this.props.card}
             getNewCard={this.props.getNewCard}
+            deck={this.props.deck}
           />
         </div>
 
-        {/* Get new question */}
-        {/* <button className="getNewQuestionBtn" onClick={() => this.props.getNewCard()}>Gets Another Question</button> */}
-
         <PlayerStats className="playerStatsContainer" />
       </div>
-      // </div>
     );
   }
 }

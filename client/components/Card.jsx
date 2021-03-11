@@ -11,7 +11,7 @@ const Card = (props) => (
           for (let i = 0; i < 4; i++) {
             if (e.target[i].checked) {
               if (e.target[i].attributes.iscorrect.value === 'true') {
-                props.correctChoice(1);
+                props.correctChoice();
                 console.log('correct');
                 if (props.currentScore > props.highScore) {
                   // why two calls here? can they be grouped
@@ -77,10 +77,10 @@ const Card = (props) => (
         <div className="questionSubmitBtnContainer">
           <input className="questionSubmitBtn" type="submit" value="Submit" />
           <input
-            onClick={props.getNewCard}
+            onClick={(e) => props.getNewCard(props.deck)}
             className="questionSubmitBtn"
             type="submit"
-            value="Card"
+            value="TEMP"
           />
         </div>
       </form>

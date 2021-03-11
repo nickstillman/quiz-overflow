@@ -1,23 +1,25 @@
-import { bindActionCreators } from 'redux';
 import * as types from './actionTypes';
 
-export const getNewCard = () => (dispatch) => {
-  console.log('actions getNewDeck fired...');
+export const getNewDeck = () => (dispatch) => {
+  console.log('actions:getNewDeck fired...');
   fetch('/quiz-overflow')
     .then((res) => res.json())
     .then((data) => {
-      console.log('deck', data.questions);
       const deck = data.questions;
-      return deck;
-    })
-    .then((deck) =>
-      // we're receiving cards array
-      // this is where we should probably iterate here or in state
-      dispatch({
+      return dispatch({
         type: types.NEW_DECK_RECEIVED,
         payload: deck,
-      })
-    );
+      });
+    });
+};
+
+export const getNewCard = (deckSize) => (dispatch) => {
+  console.log('actions:getNewCard fired...');
+  if (deckSize.length === 0) dispatch(getNewDeck());
+  else
+    return dispatch({
+      type: types.GET_NEW_CARD,
+    });
 };
 
 export const getHighScore = () => (dispatch) => {
@@ -53,7 +55,6 @@ export const newHighScore = (score) => ({
   payload: score,
 });
 
-export const correctChoice = (num) => ({
+export const correctChoice = () => ({
   type: types.CORRECT_CHOICE,
-  payload: num,
 });
