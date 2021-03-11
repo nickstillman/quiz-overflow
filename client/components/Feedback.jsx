@@ -13,18 +13,26 @@ class Feedback extends React.Component{
 
   componentDidUpdate(prevProps){
     console.log('didUpdate fired');
+    console.log('prevProps: ' + prevProps.currentScore);
+    console.log(this.props.currentScore);
     if(prevProps.currentScore !== this.props.currentScore){
       this.setState({flag: true});
     }
   }
 
   render(){
+    let feedback;
+    if(this.state.flag){
+      feedback = <div className="correctFeedback">✓</div>;
+      this.setState({flag: false});
+    }
+    console.log(feedback)
     return(
       <div>
             <div className="feedbackContainer">
-              <div score={this.props.currentScore} className="correctFeedback">✓</div>
-              <div>{this.props.currentScore}</div>
+              {/* <div className="correctFeedback">✓</div> */}
               {/* <div className="incorrectFeedback">X</div> */}
+              {feedback}
             </div>
       </div>
     )

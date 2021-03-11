@@ -17,8 +17,6 @@ const Card = (props) => {
           props.correctChoice();
           console.log('correct');
           if (props.currentScore > props.highScore) {
-            // why two calls here? can they be grouped
-            // highScore being updated here
             props.newHighScore(props.currentScore);
             props.updateHighScore(props.currentScore);
             console.log('New Highscore!!!');
