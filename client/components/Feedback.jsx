@@ -15,14 +15,22 @@ class Feedback extends React.Component{
     console.log('componentUpdate triggered')
     if(prevProps.currentScore !== this.props.currentScore){
       this.setState({scoreUpdated: true});
+      return true;
     }
   }
 
   getFeedbackElement(){
     console.log('getFeedback triggered');
-    return(
-      <div currentScore={this.props.currentScore} className="correctFeedback">✓</div>
-    );
+    if(this.props.currentScore === 0){
+      console.log('zero detected!');
+      return (
+        <div key={this.props.currentScore} currentScore={this.props.currentScore}></div>
+      )
+    } else if (this.componentDidUpdate) {
+      return(
+        <div key={this.props.currentScore} currentScore={this.props.currentScore} className="correctFeedback">✓</div>
+      );
+    }
   }
 
   toggleScoreUpdated(){
@@ -32,14 +40,14 @@ class Feedback extends React.Component{
 
   render(){
     const feedback = this.getFeedbackElement();
-    console.log(feedback);
     if(this.state.scoreUpdated){
       this.toggleScoreUpdated();
     }
     return(
       <div>
             <div className="feedbackContainer">
-            <div key={this.props.currentScore}className="correctFeedback">✓</div>
+            {feedback}
+            {/* <div key={this.props.currentScore}className="correctFeedback">✓</div> */}
             </div>
       </div>
     )

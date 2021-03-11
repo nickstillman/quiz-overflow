@@ -239,6 +239,7 @@ a:hover {
 .playerStatsContainer {
   display: inline-block;
   height: 20%;
+  max-height: 5.35rem;
   color: white;
   padding: 0 1rem 0 0.8rem;
   position: relative;
@@ -310,7 +311,7 @@ a:hover {
 .feedbackContainer {
   display: flex;
   justify-content: space-around;
-  border: 1px solid orange;
+  padding: 1rem;
 }
 
 .correctFeedback {
@@ -325,7 +326,7 @@ a:hover {
   width: 5rem;
   background-color: $custom-green;
   border-radius: 100px;
-  animation: fade 3.5s ease-out forwards;
+  animation: fade 4s ease-out forwards;
 }
 
 .incorrectFeedback {
