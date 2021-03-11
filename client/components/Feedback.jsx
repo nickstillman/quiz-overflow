@@ -8,36 +8,42 @@ const mapStateToProps = (state) => ({
 class Feedback extends React.Component{
   constructor(props){
     super(props);
-    this.state = { flag: false }
+    this.state = { scoreUpdated: false }
   }
 
   componentDidUpdate(prevProps){
-    console.log('didUpdate fired');
-    console.log('prevProps: ' + prevProps.currentScore);
-    console.log(this.props.currentScore);
+    console.log('componentUpdate triggered')
     if(prevProps.currentScore !== this.props.currentScore){
-      this.setState({flag: true});
+      this.setState({scoreUpdated: true});
     }
   }
 
+  getFeedbackElement(){
+    console.log('getFeedback triggered');
+    return(
+      <div currentScore={this.props.currentScore} className="correctFeedback">✓</div>
+    );
+  }
+
+  toggleScoreUpdated(){
+    console.log('toggle detected')
+    this.setState({scoreUpdated:false});
+  }
+
   render(){
-    let feedback;
-    if(this.state.flag){
-      feedback = <div className="correctFeedback">✓</div>;
-      this.setState({flag: false});
+    const feedback = this.getFeedbackElement();
+    console.log(feedback);
+    if(this.state.scoreUpdated){
+      this.toggleScoreUpdated();
     }
-    console.log(feedback)
     return(
       <div>
             <div className="feedbackContainer">
-              {/* <div className="correctFeedback">✓</div> */}
-              {/* <div className="incorrectFeedback">X</div> */}
-              {feedback}
+            <div key={this.props.currentScore}className="correctFeedback">✓</div>
             </div>
       </div>
     )
   }
-
 } 
 
 export default connect(mapStateToProps)(Feedback);

@@ -325,7 +325,7 @@ a:hover {
   width: 5rem;
   background-color: $custom-green;
   border-radius: 100px;
-  animation: fade 2s linear forwards;
+  animation: fade 3.5s ease-out forwards;
 }
 
 .incorrectFeedback {
