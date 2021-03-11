@@ -39,20 +39,16 @@ export const getHighScore = () => (dispatch) => {
 };
 
 export const updateHighScore = (score) => (dispatch) => {
-  // 5
-  dispatch({ type: types.UPDATING_HIGHSCORE }); // just renders state
-  // updating database - should be at end of round
+  dispatch({ type: types.UPDATING_HIGHSCORE });
   fetch('/high-score', {
     method: 'put',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ score: score }), // 5
+    body: JSON.stringify({ score: score }),
   })
-    // Source of bug? - lagging high score
     .then((res) => res.json())
     .then((res) =>
       dispatch({
         type: types.HIGHSCORE_UPDATED,
-        // 5
         payload: res,
       })
     );

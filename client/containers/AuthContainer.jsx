@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import * as actions from '../actions/authActions';
 
 import Login from '../components/Login';
-import Signup from '../components/Signup';
 
 const mapStateToProps = (state) => ({
   showSignup: state.auth.showSignup,
@@ -12,38 +11,24 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  handleLogin: (e) => {
+  handleLogin: () => {
     console.log('handleLogin fired...');
-
-    e.preventDefault();
-    e.persist();
     dispatch(
       actions.postLogin({
-        username: e.target.children.username.value,
-        password: e.target.children.password.value,
+        username: document.getElementById('username').value,
+        password: document.getElementById('password').value,
       })
     );
   },
-  handleSignup: (e) => {
+
+  handleSignUp: () => {
     console.log('handleSignup fired...');
-    e.preventDefault();
-    e.persist();
     dispatch(
       actions.postSignup({
-        username: e.target.children.username.value,
-        password: e.target.children.password.value,
+        username: document.getElementById('username').value,
+        password: document.getElementById('password').value,
       })
     );
-  },
-  goToLogin: (e) => {
-    e.preventDefault();
-    e.persist();
-    dispatch(actions.showSignup(false));
-  },
-  goToSignup: (e) => {
-    e.preventDefault();
-    e.persist();
-    dispatch(actions.showSignup(true));
   },
 });
 
@@ -53,7 +38,6 @@ class AuthContainer extends Component {
   }
 
   render() {
-    // let authForm = this.props.showSignup ? ( <Signup {...this.props} /> ) : ( <Login {...this.props} /> );
     return (
       <div className="authContainer">
         <Login {...this.props} />

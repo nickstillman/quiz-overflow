@@ -7,14 +7,11 @@ import * as authActions from './actions/authActions';
 import PlayerStats from './components/PlayerStats';
 
 const mapStateToProps = (state) => ({
-  // from: the store
-  // Current default: false
   loggedIn: state.auth.loggedIn,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   changeLoginStatus: (bool) => dispatch(authActions.changeLoginStatus(bool)),
-  checkSession: () => dispatch(authActions.checkSession()),
 });
 
 class App extends Component {
@@ -23,23 +20,18 @@ class App extends Component {
   }
 
   componentDidMount() {
-    console.log('component mounted!');
-    const SSID = Cookies.get('ssid');
-    const loginStatus = SSID ? true : false;
-
-    this.props.changeLoginStatus(loginStatus);
-    // this.props.checkSession();
+    console.log('App componentDidMount fired...');
+    fetch('/check-session')
+      .then((res) => res.json())
+      .then((bool) => {
+        this.props.changeLoginStatus(bool);
+      })
+      .catch((err) => console.log(err));
   }
 
   render() {
-    console.log('status', this.props.loggedIn);
     const auth = this.props.loggedIn ? <CardContainer /> : <AuthContainer />;
-
-    return (
-      <div className="mainContainer">
-        {auth}
-      </div>
-    )
+    return <div className="mainContainer">{auth}</div>;
   }
 }
 
