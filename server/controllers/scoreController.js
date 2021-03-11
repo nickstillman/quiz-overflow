@@ -34,7 +34,7 @@ scoreController.updateHighScore = (req, res, next) => {
           return next(err);
         } else {
           console.log('updated score');
-          res.locals.high_score = res.body.score;
+          res.locals.highScore = res.body.score;
           return next();
         }
       });

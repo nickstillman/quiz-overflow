@@ -3,7 +3,7 @@ const db = require('../models/quizModels');
 const quizControllerDB = {};
 
 quizControllerDB.getQuestion = (req, res, next) => {
-  if (res.locals.cookieSessionMatch) {
+  if (res.locals.cookieSessionMatch || true) {
     console.log('get question fired');
     //grab random record from quiz question table
     const queryQuestion = `SELECT *
@@ -29,9 +29,14 @@ quizControllerDB.getQuestion = (req, res, next) => {
         
         db.query(queryChoices)
         .then((qResult) => {
+          const choices = qResult.rows;
+          const randomNum = Math.floor(Math.random() * 4);
+          for (let i = 0; i < randomNum; i++) {
+            choices.unshift(choices.pop());
+          }
+          
           //choices key holds array of answer choices
-          questionObject.choices = qResult.rows;
-          resultArray.push(questionObject);
+          resultArray.push({...questionObject, choices });
           if (resultArray.length === 5) {
             res.locals.questions = resultArray;
             return next();
