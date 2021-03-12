@@ -83,13 +83,13 @@ app.post(
       
       app.get(
         '/quiz-overflowDB',
-        // sessionController.isLoggedIn,
+        sessionController.isLoggedIn,
         quizControllerDB.getQuestion,
         (req, res) => {
           console.log('session cookieSessionMatch', res.locals.cookieSessionMatch);
-          // if (!res.locals.cookieSessionMatch) {
-          //   return res.status(200).json('Invalid session');
-          // }
+          if (!res.locals.cookieSessionMatch) {
+            return res.status(200).json('Invalid session');
+          }
           return res.status(200).json(res.locals);
         }
         )
